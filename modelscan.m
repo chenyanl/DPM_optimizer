@@ -3,10 +3,10 @@
 %ans that above thresh.
 
 function final = modelscan(imageFileNames,model,thresh)    
-    n = size(fileNames,1);
+    n = size(imageFileNames,1);
     final = {};
     for i = 1 : n
-        bbox = test(fullfile('pictures',imageFileNames{i}), model,thresh);
+        bbox = test(imageFileNames{i}, model,thresh);
         final = [final;{bbox}];
     end
 end

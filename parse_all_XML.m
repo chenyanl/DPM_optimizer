@@ -1,7 +1,8 @@
-%This script parses all LableMe XML annotation and return them in a structure.
-%The structure includes fileName, indicating fileName
+%This script parses all LableMe XML annotation and return them in a 
+%structure.
+%The structure includes filename, indicating file name for each image,
 %and a matrix of object structure, this structure indicates the name and
-%position in images.
+%position of annotated objects in images.
 function objectlist = parse_all_XML(directory)
 if nargin < 1
     directory = pwd;
@@ -15,7 +16,7 @@ fileNames = char(fileNames);
 objectlist = [];
 for i = 1 : size(fileNames,1)
     disp(['processing ',fileNames(i,:)]);
-    xDoc = parseXML(fileNames(i,:));
+    xDoc = parseXML([directory,fileNames(i,:)]);
     object = [];
     for j = 1 : size(xDoc.Children,2)
         if (strcmp(xDoc.Children(j).Name,'object'))

@@ -1,5 +1,6 @@
 function [bestf1,bestthresh,bprecision,brecall] = getbestthreshold(annotations,name,results,maptable)
-%get all results and where they come from
+
+
 bprecision = 0;
 brecall = 0;
 BB = [];
@@ -22,11 +23,11 @@ gt(size(annotations)) = struct('BB',[],'det',[]);
 for i = 1 : size(annotations)
     for j = 1 : size(annotations(i).objects)
        obname = annotations(i).objects(j).name;
-       
-       if (any(strcmp(maptable(:,1),obname)))
-            obname = maptable(strcmp(maptable(:,1),obname),2);
+       if (iscell(maptable))
+            if (any(strcmp(maptable(:,1),obname)))
+                obname = maptable(strcmp(maptable(:,1),obname),2);
+            end
        end
-       
        if any(strcmp(obname,name))
           gt(i).BB = [gt(i).BB;getboundingbox(annotations(i).objects(j))];
        end
